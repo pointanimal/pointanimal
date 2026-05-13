@@ -2,12 +2,12 @@
 <html lang="pt-BR">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>Point Animal • Clínica Veterinária 24h</title>
-  
-	<link rel="icon" type="image/png" href="logo-favicon.png">
+
+  <link rel="icon" type="image/png" href="logo-favicon.png" />
 
   <style>
 
@@ -62,6 +62,7 @@
       align-items:center;
       justify-content:space-between;
       padding:0 5%;
+      position:relative;
     }
 
     .logo img{
@@ -106,6 +107,17 @@
       width:100%;
     }
 
+    /* ================= MENU MOBILE ================= */
+
+    .menu-toggle{
+      display:none;
+      font-size:2rem;
+      color:white;
+      cursor:pointer;
+      user-select:none;
+      z-index:1001;
+    }
+
     /* ================= HERO ================= */
 
     .hero{
@@ -130,7 +142,6 @@
 
     .hero-content{
       max-width:900px;
-
       animation:entradaHero 1.4s ease;
     }
 
@@ -161,6 +172,12 @@
     .hero p{
       font-size:1.3rem;
       margin-bottom:35px;
+    }
+
+    .hero-whats-text{
+      font-size:1.1rem;
+      margin-bottom:20px;
+      color:#fff;
     }
 
     .btn{
@@ -406,6 +423,57 @@
 
     @media(max-width:900px){
 
+      header{
+        height:80px;
+      }
+
+      nav{
+        flex-direction:row;
+        justify-content:space-between;
+        align-items:center;
+      }
+
+      .logo img{
+        height:90px;
+      }
+
+      .menu-toggle{
+        display:block;
+      }
+
+      .nav-links{
+
+        position:absolute;
+
+        top:80px;
+        left:0;
+
+        width:100%;
+
+        background:rgba(11,28,14,0.98);
+
+        flex-direction:column;
+
+        align-items:center;
+
+        gap:25px;
+
+        padding:30px 0;
+
+        display:none;
+
+        box-shadow:0 15px 30px rgba(0,0,0,0.25);
+
+      }
+
+      .nav-links.ativo{
+        display:flex;
+      }
+
+      .nav-links a{
+        font-size:1.1rem;
+      }
+
       .hero h1{
         font-size:2.6rem;
       }
@@ -416,22 +484,6 @@
 
       .contato-container{
         grid-template-columns:1fr;
-      }
-
-      nav{
-        flex-direction:column;
-        justify-content:center;
-        gap:10px;
-      }
-
-      .logo img{
-        height:95px;
-      }
-
-      .nav-links{
-        gap:18px;
-        flex-wrap:wrap;
-        justify-content:center;
       }
 
     }
@@ -451,7 +503,12 @@
         <img src="logo.png">
       </a>
 
-      <div class="nav-links">
+      <!-- MENU HAMBURGER -->
+      <div class="menu-toggle" id="menu-toggle">
+        ☰
+      </div>
+
+      <div class="nav-links" id="nav-links">
 
         <a href="#home">Home</a>
         <a href="#servicos">Serviços</a>
@@ -468,40 +525,39 @@
 
   <section class="hero" id="home">
 
-   <div class="hero-content">
+    <div class="hero-content">
 
-  <h1>
-    Cuidado veterinário de excelência
-    <span>24 horas</span>
-  </h1>
+      <h1>
+        Cuidado veterinário de excelência
+        <span>24 horas</span>
+      </h1>
 
-  <p>
-    Clínica completa com emergência, exames,
-    internação e petshop em Porto Alegre
-  </p>
+      <p>
+        Clínica completa com emergência, exames,
+        internação e petshop em Porto Alegre
+      </p>
 
-  <!-- TEXTO NOVO -->
-  <div class="hero-whats-text">
-    Fale com a nossa equipe no WhatsApp
-  </div>
+      <div class="hero-whats-text">
+        Fale com a nossa equipe no WhatsApp
+      </div>
 
-  <a
-    href="https://wa.me/5551998282558"
-    target="_blank"
-    class="btn"
-  >
-    Recepção Clínica
-  </a>
+      <a
+        href="https://wa.me/5551998282558"
+        target="_blank"
+        class="btn"
+      >
+        Recepção Clínica
+      </a>
 
-  <a
-    href="https://wa.me/5551999356300"
-    target="_blank"
-    class="btn"
-  >
-    Recepção Petshop
-  </a>
+      <a
+        href="https://wa.me/5551999356300"
+        target="_blank"
+        class="btn"
+      >
+        Recepção Petshop
+      </a>
 
-</div>
+    </div>
 
   </section>
 
@@ -760,6 +816,31 @@
     elementos.forEach((elemento)=>{
 
       observador.observe(elemento);
+
+    });
+
+    // =====================================
+    // MENU HAMBURGER
+    // =====================================
+
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+
+    menuToggle.addEventListener('click', () => {
+
+      navLinks.classList.toggle('ativo');
+
+    });
+
+    // FECHA MENU AO CLICAR
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+
+      link.addEventListener('click', () => {
+
+        navLinks.classList.remove('ativo');
+
+      });
 
     });
 
